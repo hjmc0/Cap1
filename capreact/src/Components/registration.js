@@ -87,6 +87,7 @@ function Registration() {
                   value={inputData.email}
                   onChange={handleData}
                   placeholder="example@email.com"
+                  required
                 />
               </td>
             </tr>
@@ -100,6 +101,7 @@ function Registration() {
                   name="password"
                   value={inputData.password}
                   onChange={handleData}
+                  required
                 />
               </td>
             </tr>
@@ -113,6 +115,7 @@ function Registration() {
                   name="cpassword"
                   value={inputData.cpassword}
                   onChange={handleData}
+                  required
                 />
               </td>
             </tr>
@@ -171,12 +174,13 @@ function Registration() {
             <tr>
               <td colSpan="2">
                 <button type="submit">Submit</button>
-                <button onClick={handleBackToLogin}>Back to Login</button>
+                
               </td>
             </tr>
           </tbody>
         </table>
       </form>
+      <button onClick={handleBackToLogin}>Back to Login</button>
     </div>
   );
 }
