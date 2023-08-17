@@ -47,9 +47,17 @@ const Login = () => {
                     <Typography variant="h4" align="center" gutterBottom>
                         Sign In
                     </Typography>
+                    
                     <TextField label="Email" type="email" value = {email} fullWidth margin="normal" onChange={(e) => { setEmail(e.target.value) }}
                         error={!isValidEmail && email.length > 0} />
+                    {!isValidEmail && email.length > 0 && (
+                        <Alert severity="error" sx={{ marginTop: 2 }}>
+                            Email must contain "@".
+                        </Alert>
+                    )}
+
                     <TextField label="Password" type="password" fullWidth margin="normal" />
+                    
                     <Button variant="contained" fullWidth color="primary" onClick={handleLogin}>
                         Sign In
                     </Button>
@@ -60,11 +68,6 @@ const Login = () => {
                         </Link>
                     </Grid>
 
-                    {!isValidEmail && email.length > 0 && (
-                        <Alert severity="error" sx={{ marginTop: 2 }}>
-                            Email must contain "@".
-                        </Alert>
-                    )}
                 </Paper>
             </Container>
         </Box>
