@@ -3,7 +3,7 @@ import React from "react";
 import Registration from "./registration";
 
 
-const users = [{id:'',email:'', password:'', fname:'', lname:'', address:'', contactno:'', nric:'', dob:''}]
+const users = [{id:'',email:'', password:'', firstname:'', lastname:'', address:'', contactNum:'', nric:'', dateOfBirth:''}]
 
 function printProfile(){
 

@@ -29,9 +29,10 @@ function Registration() {
     }
 
     try {
-      await addDoc(collectionRef, {
+      const newDocRef = await addDoc(collectionRef, {
         userdata: inputData,
       });
+      console.log('New document added with ID:', newDocRef.id)
       setInputData(person);
     } catch (error) {
       console.error("Error adding document: ", error);
