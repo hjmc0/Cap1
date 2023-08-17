@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
+import { useNavigate } from "react-router-dom";
 
 const collectionRef = collection(db, "userdata");
 
@@ -42,9 +43,9 @@ function Registration() {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
   const handleBackToLogin = () => {
-    // Add your navigation logic here
-    // For example, use react-router to navigate to the login page
+    navigate("/");
   };
 
   return (
@@ -174,7 +175,6 @@ function Registration() {
             <tr>
               <td colSpan="2">
                 <button type="submit">Submit</button>
-                
               </td>
             </tr>
           </tbody>
