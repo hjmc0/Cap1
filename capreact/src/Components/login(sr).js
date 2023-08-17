@@ -13,17 +13,29 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Alert, Container, Stack } from '@mui/material';
-
+import {toast} from 'react-toastify';
+import { auth } from '../firebase/firebase.config';
 
 const Login = () => {
 
     const [email, setEmail] = useState('')
-    //const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('')
     const isValidEmail = email.includes('@')
 
-    const handleLogin = (e) => {
-        setEmail('');
-    }
+    const handleLogin = () => {
+        toast('Runtime error') //{
+            // Set to 15sec
+            //position: toast.POSITION.BOTTOM_LEFT, autoClose:15000})
+        // try {
+        //   await auth.signInWithEmailAndPassword(email, password);
+        //   // Sign-in successful, redirect or update state as needed
+        // } catch (error) {
+        //     toast.error('Runtime error', {
+        //         // Set to 15sec
+        //         position: toast.POSITION.BOTTOM_LEFT, autoClose:15000})
+        // }
+      };
+
 
     return (
         <Box
@@ -56,13 +68,14 @@ const Login = () => {
                         </Alert>
                     )}
 
-                    <TextField label="Password" type="password" fullWidth margin="normal" />
+                    <TextField label="Password" type="password" fullWidth margin="normal" onChange={(e) => { setPassword(e.target.value)}}/>
                     
                     <Button variant="contained" fullWidth color="primary" onClick={handleLogin}>
                         Sign In
                     </Button>
 
                     <Grid item>
+                        
                         <span>Don't have an account? </span>
                         <Link href="register" variant="body2">
                             {"Sign Up Now!"}
