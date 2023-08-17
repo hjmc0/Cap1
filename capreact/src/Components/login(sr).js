@@ -63,8 +63,9 @@ const Login = () => {
                     </Button>
 
                     <Grid item>
+                        <span>Don't have an account? </span>
                         <Link href="register" variant="body2">
-                            {"Don't have an account? Sign Up"}
+                            {"Sign Up Now!"}
                         </Link>
                     </Grid>
 
