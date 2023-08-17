@@ -19,15 +19,10 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     //const [password, setPassword] = useState('')
-    const [invalidEmail, setInvalidEmail] = useState(false)
+    const isValidEmail = email.includes('@')
 
-    const handlelogin = () => {
-        if (!email.includes('@')) {
-            setInvalidEmail(true);
-        }
-        else {
-            setInvalidEmail(false);
-        }
+    const handleLogin = (e) => {
+        setEmail('');
     }
 
     return (
@@ -52,19 +47,20 @@ const Login = () => {
                     <Typography variant="h4" align="center" gutterBottom>
                         Sign In
                     </Typography>
-                    <TextField label="Email" type="email" fullWidth margin="normal" onChange={(e) => { setEmail(e.target.value) }} />
+                    <TextField label="Email" type="email" value = {email} fullWidth margin="normal" onChange={(e) => { setEmail(e.target.value) }}
+                        error={!isValidEmail && email.length > 0} />
                     <TextField label="Password" type="password" fullWidth margin="normal" />
-                    <Button variant="contained" fullWidth color="primary" onClick={handlelogin}>
+                    <Button variant="contained" fullWidth color="primary" onClick={handleLogin}>
                         Sign In
                     </Button>
-                    <Grid Container>
-                        <Grid item>
-                            <Link href="register" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
+
+                    <Grid item>
+                        <Link href="register" variant="body2">
+                            {"Don't have an account? Sign Up"}
+                        </Link>
                     </Grid>
-                    {invalidEmail && (
+
+                    {!isValidEmail && email.length > 0 && (
                         <Alert severity="error" sx={{ marginTop: 2 }}>
                             Email must contain "@".
                         </Alert>
