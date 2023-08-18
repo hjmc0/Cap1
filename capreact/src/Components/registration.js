@@ -37,7 +37,7 @@ function Registration() {
         userdata: inputData,
       });
       setInputData(person);
-      navigate("/")
+      navigate("/login")
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -48,7 +48,7 @@ function Registration() {
   };
 
   const handleBackToLogin = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   return (
