@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { collection, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 
 import Avatar from '@mui/material/Avatar';
@@ -17,15 +17,24 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Alert, Container, Stack } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../firebase/firebase.config";
+import { getDocs, query, where } from "firebase/firestore";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
+import "react-toastify/dist/ReactToastify.css";
+
+
+// const collectionRef = collection(db, "userdata",user.id);
 
 function Edit() {
+    
     const user1 = localStorage.getItem("user");
     const user = JSON.parse(user1);
+    const userId = localStorage.getItem("userid")
+    const userID = JSON.parse(userId)
     const navigate = useNavigate();
+    const docRef = doc(db, "userdata", userID)
+
+    console.log(docRef)
     
     const [inputData, setInputData] = useState(user);
 
@@ -41,20 +50,17 @@ function Edit() {
             toast.error("Check your password again!", {
             position: toast.POSITION.TOP_CENTER,
             });
-        } else if (inputData.email === "" || !isValidEmail) {
-            toast.error("Invalid Email!", {
-            position: toast.POSITION.TOP_CENTER,
-            });
         } else if (inputData.password === "") {
             toast.error("Invalid Password", {
             position: toast.POSITION.TOP_CENTER,
             });
         } else {
+            console.log(inputData)
             try {
-            await addDoc(collectionRef, {
-                userdata: inputData,
-            });
-            setInputData(person);
+            await updateDoc(docRef,inputData).then(
+                console.log({inputData})
+            )
+            setInputData({userdata:user});
             navigate("/login");
             } catch (error) {
             console.error("Error adding document: ", error);
@@ -90,17 +96,7 @@ function Edit() {
                     </Typography>
                     <Grid>
                         <Grid>Email:</Grid>
-                        <Grid>
-                            <TextField
-                                label="New Email"
-                                type="email"
-                                name="email"
-                                value={inputData.email}
-                                fullWidth
-                                margin="normal"
-                                onChange={handleData}
-                            />
-                        </Grid>
+                        <Grid>{user.email}</Grid>
                     </Grid>
                     <Grid>
                         <Grid>Password:</Grid>
@@ -188,11 +184,31 @@ function Edit() {
                     </Grid>
                     <Grid>
                         <Grid>NRIC:</Grid>
-                        <Grid>{user.nric}</Grid>
+                        <Grid>
+                            <TextField
+                                label="NRIC"
+                                type="text"
+                                name="nric"
+                                value={inputData.nric}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
                     </Grid>
                     <Grid>
                         <Grid>Date of Birth:</Grid>
-                        <Grid>{user.dateOfBirth}</Grid>
+                        <Grid>
+                        <TextField
+                                label="Date of Birth"
+                                type="text"
+                                name="dateOfBirth"
+                                value={inputData.dateOfBirth}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
                     </Grid>
                     <Typography variant="h6" align="center" gutterBottom>
                         <p>Email: {user.email}</p>
@@ -206,7 +222,7 @@ function Edit() {
                     </Typography>
                     <Grid>
                         <Grid>
-                            <Button variant="contained" fullWidth color="primary" onClick={save}>
+                            <Button variant="contained" fullWidth color="primary" onClick={handleSubmitChanges}>
                                 Save Changes
                             </Button>
                         </Grid>
