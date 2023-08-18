@@ -61,15 +61,21 @@ function Registration() {
       position: toast.POSITION.TOP_CENTER
     })
     }
-
-    try {
-      await addDoc(collectionRef, {
-        userdata: inputData,
-      });
-      setInputData(person);
-      navigate("/login")
-    } catch (error) {
-      console.error("Error adding document: ", error);
+    else{
+      
+      try {
+        await addDoc(collectionRef, {
+          userdata: inputData,
+        });
+        setInputData(person);
+        toast.success("Registration Success!", {
+          position: toast.POSITION.TOP_CENTER
+        });
+        // navigate("/login")
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
+      
     }
   };
   
@@ -77,9 +83,9 @@ function Registration() {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-  const handleBackToLogin = () => {
-    navigate("/login");
-  };
+  // const handleBackToLogin = () => {
+  //   navigate("/login");
+  // };
 
   const isValidEmail = inputData.email.includes('@')
 
@@ -89,7 +95,7 @@ function Registration() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: '80%',
         backgroundImage: 'url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -116,29 +122,40 @@ function Registration() {
               </Grid>
             </Grid>
             
-              <TextField label="Email" type="email" name="email" value={inputData.email} fullWidth margin="normal" onChange={handleData} error={!isValidEmail && inputData.email.length > 0} helperText= {!isValidEmail && inputData.email.length > 0?'Email must contain @': ''}/>
-              <TextField label="Password" type="password" name="password" value={inputData.password} fullWidth margin="normal" onChange={handleData}/>
-              <TextField label="Confirm Password" type="password" name="cpassword" value={inputData.cpasswordaddress} fullWidth margin="normal" onChange={handleData}/>
-              <TextField label="Address" type="text" name="address" value={inputData.address} fullEmailWidth margin="normal" onChange={handleData}/>
+              <TextField required label="Email" type="email" name="email" value={inputData.email} fullWidth margin="normal" onChange={handleData} error={!isValidEmail && inputData.email.length > 0} helperText= {!isValidEmail && inputData.email.length > 0?'Email must contain @': ''}/>
+              <TextField required label="Password" type="password" name="password" value={inputData.password} fullWidth margin="normal" onChange={handleData}/>
+              <TextField required label="Confirm Password" type="password" name="cpassword" value={inputData.cpassword} fullWidth margin="normal" onChange={handleData}/>
+              <TextField label="Address" type="text" name="address" value={inputData.address} fullWidth margin="normal" onChange={handleData}/>
               
+          
+
               <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-              <TextField label="Contact No." type="text" name="contactNum" value={inputData.contactNum} fullEmailWidth margin="normal" onChange={handleData}/>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField label="Contact No." type="text" name="contactNum" value={inputData.contactNum} fullEmailWidth margin="normal" onChange={handleData}/>
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField label="NRIC" type="text" name="nric" value={inputData.nric} fullEmailWidth margin="normal" onChange={handleData}/>
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-              <TextField label="NRIC" type="text" name="nric" value={inputData.nric} fullEmailWidth margin="normal" onChange={handleData}/>
-              </Grid>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-              <TextField label="Date Of Birth" type="date" name="dateOfBirth" value={inputData.dateOfBirth} fullEmailWidth margin="normal" onChange={handleData}/>
-              </Grid>
+
+              <br></br>
+              <span>Date of Birth: </span>
+              <input
+                  type="date"
+                  name="dateOfBirth"
+                  value={inputData.dateOfBirth}
+                  onChange={handleData}
+                />
+                <br></br>
+                <br></br>
 
               <Button variant="contained" fullWidth color="primary" type="submit" onClick={handleSubmit}>
                             Submit to Register
                   </Button>
 
             <Grid item>
-              <span>Click: </span>
                 <Link href="login" variant="body2">
                     {"Login Page"}
                 </Link>
