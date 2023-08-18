@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 const collectionRef = collection(db, "userdata");
 
+
 function Registration() {
+
   const person = {
     email: "",
     password: "",
@@ -19,10 +21,11 @@ function Registration() {
   };
 
   const [inputData, setInputData] = useState(person);
-
+  const navigate = useNavigate();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     // Validate password confirmation
     if (inputData.password !== inputData.cpassword) {
       console.error("Passwords do not match");
@@ -34,16 +37,16 @@ function Registration() {
         userdata: inputData,
       });
       setInputData(person);
+      navigate("/")
     } catch (error) {
       console.error("Error adding document: ", error);
     }
   };
-
+  
   const handleData = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-  const navigate = useNavigate();
   const handleBackToLogin = () => {
     navigate("/");
   };
