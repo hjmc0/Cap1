@@ -64,12 +64,20 @@ function Home() {
                   <p>NRIC: {user.nric}</p>
                   <p>Date of Birth: {user.dateOfBirth}</p>
                 </Typography>
-                <Button variant="contained" fullWidth color="primary" onClick={edit}>
-                    Update Profile
-                </Button>
-                <Button variant="contained" fullWidth color="primary" onClick={handleLogout}>
-                    Log Out
-                </Button>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6}>
+                    <Button variant="contained" fullWidth color="primary" onClick={edit}>
+                      Update Profile
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Button variant="contained" fullWidth color="primary" onClick={handleLogout}>
+                      Log Out
+                   </Button>
+                  </Grid>
+                </Grid>
+                
+                
                 <ToastContainer/>
             </Paper>
         </Container>
