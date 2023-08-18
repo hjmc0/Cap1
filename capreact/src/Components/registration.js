@@ -62,16 +62,20 @@ function Registration() {
     else{
       
       try {
-        await addDoc(collectionRef,inputData
-        );
+        await addDoc(collectionRef, {
+          userdata: inputData,
+        });
         setInputData(person);
-        toast.success("Registration Success!", {
+        toast.success("Registration Success! Loading Login Page in ...", {
           position: toast.POSITION.TOP_CENTER
         });
         // navigate("/login")
       } catch (error) {
         console.error("Error adding document: ", error);
       }
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
       
     }
   };
@@ -92,7 +96,7 @@ function Registration() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '80%',
+        height: '100vh',
         backgroundImage: 'url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
