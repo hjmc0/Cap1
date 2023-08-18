@@ -28,6 +28,9 @@ function Home() {
     navigate('/login')
   }
 
+  const edit = () => {
+    navigate('/edit')
+  }
   return (
     <div>
       <Box
@@ -61,7 +64,7 @@ function Home() {
                   <p>NRIC: {user.nric}</p>
                   <p>Date of Birth: {user.dateOfBirth}</p>
                 </Typography>
-                <Button variant="contained" fullWidth color="primary">
+                <Button variant="contained" fullWidth color="primary" onClick={edit}>
                     Update Profile
                 </Button>
                 <Button variant="contained" fullWidth color="primary" onClick={handleLogout}>
