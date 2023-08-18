@@ -34,9 +34,10 @@ const Login = () => {
         
 
         userDoc.forEach(user => {
-            if(user.data().email == email && user.data().password == password){
+            let userinfo = user.data() 
+            if(userinfo.email == email && userinfo.password == password){
                 isAuthorized = true
-                localStorage.setItem("user", JSON.stringify(user.data()))
+                localStorage.setItem("user", JSON.stringify(userinfo))
                 localStorage.setItem("userid", user.id)
                 return
             }

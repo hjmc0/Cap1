@@ -4,19 +4,20 @@ import Login from "./Components/login";
 import Home from "./Components/home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Edit from "./Components/edit";
+import Confirmation from "./Components/confirmation";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/home" element={<Home />} />
           <Route path="/edit" element={<Edit />} />
         </Routes>
-      </BrowserRouter>
-
+      </BrowserRouter> */}
+      <Confirmation/>
     </div>
   );
 }
