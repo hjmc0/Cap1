@@ -36,7 +36,6 @@ const Login = () => {
         userDoc.forEach(user => {
             if(user.data().userdata.email == email && user.data().userdata.password == password){
                 isAuthorized = true
-                console.log(user.data().userdata)
                 localStorage.setItem("user", JSON.stringify(user.data().userdata))
                 return
             }
