@@ -17,30 +17,32 @@ import { toast, ToastContainer } from 'react-toastify';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router';
 
 const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const isValidEmail = email.includes('@')
+    const navigate = useNavigate();
     var isAuthorized = false;
 
     const handleLogin = async () => {
 
         const q = query(collection(db, "userdata"))
         const userDoc = await getDocs(q);
+        
 
         userDoc.forEach(user => {
             if(user.data().userdata.email == email && user.data().userdata.password == password){
                 isAuthorized = true
+                localStorage.setItem("user", JSON.stringify(user.data().userdata))
                 return
             }
         })
-
+        
         if(isAuthorized){
-            toast.success("Login Success!", {
-                position: toast.POSITION.TOP_CENTER
-              });
+            navigate('/home')
             
         }else{
             toast.error("Your Email or Password is incorrect. Please try again.", {

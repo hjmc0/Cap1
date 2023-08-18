@@ -61,18 +61,17 @@ function Registration() {
       position: toast.POSITION.TOP_CENTER
     })
     }
-    else {
-          try {
-            await addDoc(collectionRef, {
-              userdata: inputData,
-            });
-            setInputData(person);
-            navigate("/login")
-          } catch (error) {
-            console.error("Error adding document: ", error);
-          }
-        }
-    };
+
+    try {
+      await addDoc(collectionRef, {
+        userdata: inputData,
+      });
+      setInputData(person);
+      navigate("/login")
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
   
   const handleData = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
