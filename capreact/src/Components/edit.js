@@ -28,10 +28,15 @@ function Edit() {
       navigate('/home')
     }
   
-    const Save = () => {
-      navigate('/edit')
+    const handleSaveChanges = () => {
+      
+      
+        navigate('/home')
     }
 
+    const handleData = (e) => {
+        setInputData({ ...inputData, [e.target.name]: e.target.value });
+      };
 
     return (
       <div>
@@ -66,12 +71,18 @@ function Edit() {
                     <p>NRIC: {user.nric}</p>
                     <p>Date of Birth: {user.dateOfBirth}</p>
                   </Typography>
-                  <Button variant="contained" fullWidth color="primary" onClick={edit}>
-                      Update Profile
-                  </Button>
-                  <Button variant="contained" fullWidth color="primary" onClick={handleBack}>
-                      Back to User Profile
-                  </Button>
+                  <Grid>
+                      <Grid>
+                          <Button variant="contained" fullWidth color="primary" onClick={save}>
+                              Save Changes
+                          </Button>
+                      </Grid>
+                      <Grid>
+                          <Button variant="contained" fullWidth color="primary" onClick={handleBack}>
+                              Back to User Profile
+                          </Button>
+                      </Grid>
+                  </Grid>
                   <ToastContainer/>
               </Paper>
           </Container>
