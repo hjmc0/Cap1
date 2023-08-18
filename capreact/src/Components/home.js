@@ -22,6 +22,11 @@ import { useNavigate } from 'react-router';
 function Home() {
   const user1 = localStorage.getItem("user");
   const user = JSON.parse(user1);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/login')
+  }
 
   return (
     <div>
@@ -59,7 +64,7 @@ function Home() {
                 <Button variant="contained" fullWidth color="primary">
                     Update Profile
                 </Button>
-                <Button variant="contained" fullWidth color="primary">
+                <Button variant="contained" fullWidth color="primary" onClick={handleLogout}>
                     Log Out
                 </Button>
                 <ToastContainer/>
