@@ -37,6 +37,7 @@ const Login = () => {
             if(user.data().userdata.email == email && user.data().userdata.password == password){
                 isAuthorized = true
                 localStorage.setItem("user", JSON.stringify(user.data().userdata))
+                localStorage.setItem("userid", JSON.stringify(user.id))
                 return
             }
         })
