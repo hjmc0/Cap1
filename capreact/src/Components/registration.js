@@ -62,9 +62,8 @@ function Registration() {
     else{
       
       try {
-        await addDoc(collectionRef, {
-          userdata: inputData,
-        });
+        await addDoc(collectionRef,inputData
+        );
         setInputData(person);
         toast.success("Registration Success!", {
           position: toast.POSITION.TOP_CENTER
