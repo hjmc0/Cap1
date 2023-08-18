@@ -33,17 +33,21 @@ const Login = () => {
         userDoc.forEach(user => {
             if(user.data().userdata.email == email && user.data().userdata.password == password){
                 isAuthorized = true
+                return
             }
         })
 
         if(isAuthorized){
-            toast.success("Login Success!");
+            toast.success("Login Success!", {
+                position: toast.POSITION.TOP_CENTER
+              });
             
         }else{
-            toast.error("Wrong Email or Password!")
+            toast.error("Your Email or Password is incorrect. Please try again.", {
+                position: toast.POSITION.TOP_CENTER
+              });
+        
         }
-        
-        
     };
 
         return (
@@ -66,31 +70,28 @@ const Login = () => {
                             </Avatar>
                         </Stack>
                         <Typography variant="h4" align="center" gutterBottom>
-                            Sign In
+                            Welcome
                         </Typography>
 
                         <TextField label="Email" type="email" value={email} fullWidth margin="normal" onChange={(e) => { setEmail(e.target.value) }}
-                            error={!isValidEmail && email.length > 0} />
-                        {!isValidEmail && email.length > 0 && (
-                            <Alert severity="error" sx={{ marginTop: 2 }}>
-                                Email must contain "@".
-                            </Alert>
-                        )}
+                            error={!isValidEmail && email.length > 0} helperText= {!isValidEmail && email.length > 0?'Email must contain @': '' }/>
 
-                        <TextField label="Password" type="password" fullWidth margin="normal" onChange={(e) => { setPassword(String(e.target.value)) }} />
+
+                        <TextField label="Password" type="password" fullWidth margin="normal" onChange={(e) => { setPassword(String(e.target.value)) }}/>
 
                         <Button variant="contained" fullWidth color="primary" onClick={handleLogin}>
-                            Sign In
+                            LOGIN
                         </Button>
 
                         <Grid item>
-
                             <span>Don't have an account? </span>
                             <Link href="register" variant="body2">
-                                {"Sign Up Now!"}
+                                {"Register Now!"}
                             </Link>
                         </Grid>
+
                         <ToastContainer/>
+
                     </Paper>
                 </Container>
             </Box>
