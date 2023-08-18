@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
+import { useNavigate } from "react-router-dom";
 
 const collectionRef = collection(db, "userdata");
 
+
 function Registration() {
+
   const person = {
     email: "",
     password: "",
@@ -18,10 +21,11 @@ function Registration() {
   };
 
   const [inputData, setInputData] = useState(person);
-
+  const navigate = useNavigate();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     // Validate password confirmation
     if (inputData.password !== inputData.cpassword) {
       console.error("Passwords do not match");
@@ -34,18 +38,18 @@ function Registration() {
       });
       console.log('New document added with ID:', newDocRef.id)
       setInputData(person);
+      navigate("/login")
     } catch (error) {
       console.error("Error adding document: ", error);
     }
   };
-
+  
   const handleData = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
   const handleBackToLogin = () => {
-    // Add your navigation logic here
-    // For example, use react-router to navigate to the login page
+    navigate("/login");
   };
 
   return (
@@ -88,6 +92,7 @@ function Registration() {
                   value={inputData.email}
                   onChange={handleData}
                   placeholder="example@email.com"
+                  required
                 />
               </td>
             </tr>
@@ -101,6 +106,7 @@ function Registration() {
                   name="password"
                   value={inputData.password}
                   onChange={handleData}
+                  required
                 />
               </td>
             </tr>
@@ -114,6 +120,7 @@ function Registration() {
                   name="cpassword"
                   value={inputData.cpassword}
                   onChange={handleData}
+                  required
                 />
               </td>
             </tr>
@@ -172,12 +179,12 @@ function Registration() {
             <tr>
               <td colSpan="2">
                 <button type="submit">Submit</button>
-                <button onClick={handleBackToLogin}>Back to Login</button>
               </td>
             </tr>
           </tbody>
         </table>
       </form>
+      <button onClick={handleBackToLogin}>Back to Login</button>
     </div>
   );
 }
