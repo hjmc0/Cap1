@@ -1,7 +1,7 @@
 import "./App.css";
 import Registration from "./Components/registration";
 import Login from "./Components/login(sr)";
-import { ToastContainer, toast } from "react-toastify";
+import Home from "./Components/home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </div>
