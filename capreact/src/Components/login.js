@@ -43,7 +43,7 @@ const Login = () => {
         })
         
         if(isAuthorized){
-            navigate('/home')
+            navigate('/home', { replace: true })
             
         }else{
             toast.error("Your Email or Password is incorrect. Please try again.", {

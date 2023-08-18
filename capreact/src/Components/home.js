@@ -25,11 +25,11 @@ function Home() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate('/login')
+    navigate('/login', { replace: true })
   }
 
   const edit = () => {
-    navigate('/edit')
+    navigate('/edit', { replace: true })
   }
   return (
     <div>

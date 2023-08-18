@@ -39,7 +39,7 @@ function Edit() {
   const [inputData, setInputData] = useState(user);
 
   const handleBack = () => {
-    navigate("/home");
+    navigate("/home",{ replace: true });
   };
 
   const handleSubmitChanges = async (e) => {
@@ -60,12 +60,12 @@ function Edit() {
         await updateDoc(docRef, inputData).then(console.log({ inputData }));
         setInputData({ userdata: user });
         localStorage.setItem("user", JSON.stringify(inputData));
-        navigate("/login");
+        navigate("/login", { replace: true });
       } catch (error) {
         console.error("Error adding document: ", error);
       }
     }
-    navigate("/home");
+    navigate("/home" , { replace: true });
   };
 
   const handleData = (e) => {
@@ -212,16 +212,6 @@ function Edit() {
                 />
               </Grid>
             </Grid>
-            <Typography variant="h6" align="center" gutterBottom>
-              <p>Email: {user.email}</p>
-              <p>Password: {user.password}</p>
-              <p>First Name: {user.firstName}</p>
-              <p>Last Name: {user.lastName}</p>
-              <p>Address: {user.address}</p>
-              <p>Contact Number: {user.contactNum}</p>
-              <p>NRIC: {user.nric}</p>
-              <p>Date of Birth: {user.dateOfBirth}</p>
-            </Typography>
             <Grid>
               <Grid>
                 <Button
