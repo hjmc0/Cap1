@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { collection, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase.config";
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -23,20 +26,46 @@ function Edit() {
     const user1 = localStorage.getItem("user");
     const user = JSON.parse(user1);
     const navigate = useNavigate();
-  
+    
+    const [inputData, setInputData] = useState(user);
+
     const handleBack = () => {
       navigate('/home')
     }
   
-    const handleSaveChanges = () => {
-      
-      
+    const handleSubmitChanges = async (e) => {
+        e.preventDefault();
+        
+        // Validate password confirmation
+        if (inputData.password !== inputData.cpassword) {
+            toast.error("Check your password again!", {
+            position: toast.POSITION.TOP_CENTER,
+            });
+        } else if (inputData.email === "" || !isValidEmail) {
+            toast.error("Invalid Email!", {
+            position: toast.POSITION.TOP_CENTER,
+            });
+        } else if (inputData.password === "") {
+            toast.error("Invalid Password", {
+            position: toast.POSITION.TOP_CENTER,
+            });
+        } else {
+            try {
+            await addDoc(collectionRef, {
+                userdata: inputData,
+            });
+            setInputData(person);
+            navigate("/login");
+            } catch (error) {
+            console.error("Error adding document: ", error);
+            }
+        }
         navigate('/home')
-    }
+    };  
 
-    // const handleData = (e) => {
-    //     setInputData({ ...inputData, [e.target.name]: e.target.value });
-      };
+    const handleData = (e) => {
+        setInputData({ ...inputData, [e.target.name]: e.target.value });
+    };
 
     return (
         <div>
@@ -61,36 +90,96 @@ function Edit() {
                     </Typography>
                     <Grid>
                         <Grid>Email:</Grid>
-                        <Grid></Grid>
+                        <Grid>
+                            <TextField
+                                label="New Email"
+                                type="email"
+                                name="email"
+                                value={inputData.email}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
                     </Grid>
                     <Grid>
                         <Grid>Password:</Grid>
-                        <Grid></Grid>
+                        <Grid>
+                            <TextField
+                                label="New Password"
+                                type="password"
+                                name="password"
+                                value={inputData.password}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
                     </Grid>
                     <Grid>
                         <Grid>Confirm Password:</Grid>
-                        <Grid></Grid>
-                    </Grid>
-                    <Grid>
-                        <Grid>First Name:</Grid>
-                        <Grid></Grid>
-                    </Grid>
-                    <Grid>
-                        <Grid>Last Name:</Grid>
-                        <Grid></Grid>
-                    </Grid>
-                    <Grid>
-                        <Grid>Address:</Grid>
-                        <Grid></Grid>
-                    </Grid>
-                    <Grid>
-                        <Grid>Contact Number:</Grid>
                         <Grid>
                             <TextField
                                 label="Confirm Password"
                                 type="password"
                                 name="cpassword"
-                                value={inputData.cpasswordaddress}
+                                value={inputData.cpassword}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>First Name:</Grid>
+                        <Grid>
+                            <TextField
+                                label="First Name"
+                                type="text"
+                                name="firstName"
+                                value={inputData.firstName}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Last Name:</Grid>
+                        <Grid>
+                            <TextField
+                                label="Last Name"
+                                type="text"
+                                name="lasttName"
+                                value={inputData.lastName}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Address:</Grid>
+                        <Grid>
+                            <TextField
+                                label="Address"
+                                type="text"
+                                name="address"
+                                value={inputData.address}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Contact Number:</Grid>
+                        <Grid>
+                            <TextField
+                                label="Contact Number"
+                                type="text"
+                                name="contactNum"
+                                value={inputData.contactNum}
                                 fullWidth
                                 margin="normal"
                                 onChange={handleData}
@@ -132,7 +221,6 @@ function Edit() {
             </Container>
             </Box>
         </div>
-      
     );
-  }
-  export default Edit;
+}
+export default Edit;
