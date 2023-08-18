@@ -34,60 +34,104 @@ function Edit() {
         navigate('/home')
     }
 
-    const handleData = (e) => {
-        setInputData({ ...inputData, [e.target.name]: e.target.value });
+    // const handleData = (e) => {
+    //     setInputData({ ...inputData, [e.target.name]: e.target.value });
       };
 
     return (
-      <div>
-        <Box
-          sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100vh',
-              backgroundImage: 'url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-          }}
-          >
-          <Container maxWidth="xs">
-              <Paper elevation={3} sx={{ padding: 3 }}>
-                  <Stack sx={{ justifyContent: 'center', alignItems: 'center', }}>
-                      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                          <PersonIcon />
-                      </Avatar>
-                  </Stack>
-                  <Typography variant="h4" align="center" gutterBottom>
-                      Edit User Profile
-                  </Typography>
-                  <Typography variant="h6" align="center" gutterBottom>
-                    <p>Email: {user.email}</p>
-                    <p>Password: {user.password}</p>
-                    <p>First Name: {user.firstName}</p>
-                    <p>Last Name: {user.lastName}</p>
-                    <p>Address: {user.address}</p>
-                    <p>Contact Number: {user.contactNum}</p>
-                    <p>NRIC: {user.nric}</p>
-                    <p>Date of Birth: {user.dateOfBirth}</p>
-                  </Typography>
-                  <Grid>
-                      <Grid>
-                          <Button variant="contained" fullWidth color="primary" onClick={save}>
-                              Save Changes
-                          </Button>
-                      </Grid>
-                      <Grid>
-                          <Button variant="contained" fullWidth color="primary" onClick={handleBack}>
-                              Back to User Profile
-                          </Button>
-                      </Grid>
-                  </Grid>
-                  <ToastContainer/>
-              </Paper>
-          </Container>
-          </Box>
-      </div>
+        <div>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                backgroundImage: 'url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}>
+            <Container maxWidth="xs">
+                <Paper elevation={3} sx={{ padding: 3 }}>
+                    <Stack sx={{ justifyContent: 'center', alignItems: 'center', }}>
+                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                            <PersonIcon />
+                        </Avatar>
+                    </Stack>
+                    <Typography variant="h4" align="center" gutterBottom>
+                        Edit User Profile
+                    </Typography>
+                    <Grid>
+                        <Grid>Email:</Grid>
+                        <Grid></Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Password:</Grid>
+                        <Grid></Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Confirm Password:</Grid>
+                        <Grid></Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>First Name:</Grid>
+                        <Grid></Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Last Name:</Grid>
+                        <Grid></Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Address:</Grid>
+                        <Grid></Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Contact Number:</Grid>
+                        <Grid>
+                            <TextField
+                                label="Confirm Password"
+                                type="password"
+                                name="cpassword"
+                                value={inputData.cpasswordaddress}
+                                fullWidth
+                                margin="normal"
+                                onChange={handleData}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>NRIC:</Grid>
+                        <Grid>{user.nric}</Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>Date of Birth:</Grid>
+                        <Grid>{user.dateOfBirth}</Grid>
+                    </Grid>
+                    <Typography variant="h6" align="center" gutterBottom>
+                        <p>Email: {user.email}</p>
+                        <p>Password: {user.password}</p>
+                        <p>First Name: {user.firstName}</p>
+                        <p>Last Name: {user.lastName}</p>
+                        <p>Address: {user.address}</p>
+                        <p>Contact Number: {user.contactNum}</p>
+                        <p>NRIC: {user.nric}</p>
+                        <p>Date of Birth: {user.dateOfBirth}</p>
+                    </Typography>
+                    <Grid>
+                        <Grid>
+                            <Button variant="contained" fullWidth color="primary" onClick={save}>
+                                Save Changes
+                            </Button>
+                        </Grid>
+                        <Grid>
+                            <Button variant="contained" fullWidth color="primary" onClick={handleBack}>
+                                Back to User Profile
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <ToastContainer/>
+                </Paper>
+            </Container>
+            </Box>
+        </div>
       
     );
   }
