@@ -59,6 +59,7 @@ function Edit() {
       try {
         await updateDoc(docRef, inputData).then(console.log({ inputData }));
         setInputData({ userdata: user });
+        localStorage.setItem("user", JSON.stringify(inputData));
         navigate("/login");
       } catch (error) {
         console.error("Error adding document: ", error);
