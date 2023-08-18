@@ -76,8 +76,6 @@ function Home() {
                    </Button>
                   </Grid>
                 </Grid>
-                
-                
                 <ToastContainer/>
             </Paper>
         </Container>
