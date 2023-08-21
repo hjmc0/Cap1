@@ -148,7 +148,7 @@ function Edit() {
                 <TextField
                   label="Last Name"
                   type="text"
-                  name="lasttName"
+                  name="lastName"
                   value={inputData.lastName}
                   fullWidth
                   margin="normal"

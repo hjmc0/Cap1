@@ -46,28 +46,22 @@ function Registration() {
     // Validate password confirmation
     if (inputData.password !== inputData.cpassword) {
       toast.error("Check your password again!", {
-        position: toast.POSITION.TOP_CENTER
-      })
-    }
-    else if (inputData.email === '' || !isValidEmail) {
-      toast.error("Invalid Email!",{
-      position: toast.POSITION.TOP_CENTER
-    })
-    }
-    else if (inputData.password === '' ) {
-      toast.error("Invalid Password",{
-      position: toast.POSITION.TOP_CENTER
-    })
-    }
-    else{
-      
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (inputData.email === "" || !isValidEmail) {
+      toast.error("Invalid Email!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (inputData.password === "") {
+      toast.error("Invalid Password", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
       try {
-        await addDoc(collectionRef, {
-          userdata: inputData,
-        });
+        await addDoc(collectionRef, inputData);
         setInputData(person);
         toast.success("Registration Success! Loading Login Page in ...", {
-          position: toast.POSITION.TOP_CENTER
+          position: toast.POSITION.TOP_CENTER,
         });
         // navigate("/login")
       } catch (error) {
@@ -76,7 +70,6 @@ function Registration() {
       setTimeout(() => {
         navigate("/login");
       }, 3000);
-      
     }
   };
 
@@ -92,17 +85,18 @@ function Registration() {
 
   return (
     <Box
-    sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundImage: 'url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    }}
->
-    <Container maxWidth="xs">
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundImage:
+          "url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Container maxWidth="xs">
         <Paper elevation={3} sx={{ padding: 3 }}>
           <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -113,70 +107,128 @@ function Registration() {
             Registration
           </Typography>
           <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="First Name"
-                  type="text"
-                  name="firstName"
-                  value={inputData.firstName}
-                  fullWidth
-                  margin="normal"
-                  onChange={handleData}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Last Name"
-                  type="text"
-                  name="lastName"
-                  value={inputData.lastNameName}
-                  fullWidth
-                  margin="normal"
-                  onChange={handleData}
-                />
-              </Grid>
-            
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="First Name"
+                type="text"
+                name="firstName"
+                value={inputData.firstName}
+                fullWidth
+                margin="normal"
+                onChange={handleData}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Last Name"
+                type="text"
+                name="lastName"
+                value={inputData.lastNameName}
+                fullWidth
+                margin="normal"
+                onChange={handleData}
+              />
+            </Grid>
+          </Grid>
+
+          <TextField
+            required
+            label="Email"
+            type="email"
+            name="email"
+            value={inputData.email}
+            fullWidth
+            margin="normal"
+            onChange={handleData}
+            error={!isValidEmail && inputData.email.length > 0}
+            helperText={
+              !isValidEmail && inputData.email.length > 0
+                ? "Email must contain @"
+                : ""
+            }
+          />
+          <TextField
+            required
+            label="Password"
+            type="password"
+            name="password"
+            value={inputData.password}
+            fullWidth
+            margin="normal"
+            onChange={handleData}
+          />
+          <TextField
+            required
+            label="Confirm Password"
+            type="password"
+            name="cpassword"
+            value={inputData.cpassword}
+            fullWidth
+            margin="normal"
+            onChange={handleData}
+          />
+          <TextField
+            label="Address"
+            type="text"
+            name="address"
+            value={inputData.address}
+            fullWidth
+            margin="normal"
+            onChange={handleData}
+          />
+
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Contact No."
+                type="text"
+                name="contactNum"
+                value={inputData.contactNum}
+                fullEmailWidth
+                margin="normal"
+                onChange={handleData}
+              />
             </Grid>
 
-              <TextField required label="Email" type="email" name="email" value={inputData.email} fullWidth margin="normal" onChange={handleData} error={!isValidEmail && inputData.email.length > 0} helperText= {!isValidEmail && inputData.email.length > 0?'Email must contain @': ''}/>
-              <TextField required label="Password" type="password" name="password" value={inputData.password} fullWidth margin="normal" onChange={handleData}/>
-              <TextField required label="Confirm Password" type="password" name="cpassword" value={inputData.cpassword} fullWidth margin="normal" onChange={handleData}/>
-              <TextField label="Address" type="text" name="address" value={inputData.address} fullWidth margin="normal" onChange={handleData}/>
-              
-          
-
-              <Grid container spacing={3}>
-
-                <Grid item xs={12} sm={6}>
-                  <TextField label="Contact No." type="text" name="contactNum" value={inputData.contactNum} fullEmailWidth margin="normal" onChange={handleData}/>
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                  <TextField label="NRIC" type="text" name="nric" value={inputData.nric} fullEmailWidth margin="normal" onChange={handleData}/>
-                </Grid>
-              </Grid>
-
-              <br></br>
-              <span>Date of Birth: </span>
-              <input
-                  type="date"
-                  name="dateOfBirth"
-                  value={inputData.dateOfBirth}
-                  onChange={handleData}
-                />
-                <br></br>
-                <br></br>
-
-              <Button variant="contained" fullWidth color="primary" type="submit" onClick={handleSubmit}>
-                            Submit to Register
-                  </Button>
-
-            <Grid item>
-                <Link href="login" variant="body2">
-                    {"Login Page"}
-                </Link>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="NRIC"
+                type="text"
+                name="nric"
+                value={inputData.nric}
+                fullEmailWidth
+                margin="normal"
+                onChange={handleData}
+              />
             </Grid>
-          
+          </Grid>
+
+          <br></br>
+          <span>Date of Birth: </span>
+          <input
+            type="date"
+            name="dateOfBirth"
+            value={inputData.dateOfBirth}
+            onChange={handleData}
+          />
+          <br></br>
+          <br></br>
+
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Submit to Register
+          </Button>
+
+          <Grid item>
+            <Link href="login" variant="body2">
+              {"Login Page"}
+            </Link>
+          </Grid>
 
           <ToastContainer />
         </Paper>

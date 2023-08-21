@@ -9,15 +9,15 @@ import Confirmation from "./Components/confirmation";
 function App() {
   return (
     <div className="App">
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/home" element={<Home />} />
           <Route path="/edit" element={<Edit />} />
         </Routes>
-      </BrowserRouter> */}
-      <Confirmation/>
+      </BrowserRouter>
+      {/*<Confirmation/>*/}
     </div>
   );
 }
