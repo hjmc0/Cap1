@@ -22,7 +22,11 @@ import { Alert, Container, Stack } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// import Firebase authentication methods
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 const collectionRef = collection(db, "userdata");
+const auth = getAuth();
 
 function Registration() {
   const person = {
@@ -58,14 +62,20 @@ function Registration() {
       });
     } else {
       try {
-        await addDoc(collectionRef, inputData);
-        setInputData(person);
-        toast.success("Registration Success! Loading Login Page in ...", {
-          position: toast.POSITION.TOP_CENTER,
+        createUserWithEmailAndPassword(
+          auth,
+          inputData.email,
+          inputData.password
+        ).then((userCredential) => {
+          // Signed in
+          toast.success("Registration Success! Loading Login Page in ...", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+          setInputData(person);
+          console.log(userCredential.user)
         });
-        // navigate("/login")
       } catch (error) {
-        console.error("Error adding document: ", error);
+        console.error(error);
       }
       setTimeout(() => {
         navigate("/login");
