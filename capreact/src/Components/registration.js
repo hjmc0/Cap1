@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
 
@@ -24,8 +24,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import Firebase authentication methods
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-const collectionRef = collection(db, "userdata");
 const auth = getAuth();
 
 function Registration() {
@@ -66,20 +64,21 @@ function Registration() {
           auth,
           inputData.email,
           inputData.password
-        ).then((userCredential) => {
+        ).then(async (userCredential) => {
           // Signed in
           toast.success("Registration Success! Loading Login Page in ...", {
             position: toast.POSITION.TOP_CENTER,
           });
+          const uid = userCredential.user.uid;
+          await setDoc(doc(db, "userdata", uid), inputData);
           setInputData(person);
-          console.log(userCredential.user)
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
         });
       } catch (error) {
         console.error(error);
       }
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
     }
   };
 
@@ -194,7 +193,7 @@ function Registration() {
                 type="text"
                 name="contactNum"
                 value={inputData.contactNum}
-                fullEmailWidth
+                fullWidth
                 margin="normal"
                 onChange={handleData}
               />
@@ -206,7 +205,7 @@ function Registration() {
                 type="text"
                 name="nric"
                 value={inputData.nric}
-                fullEmailWidth
+                fullWidth
                 margin="normal"
                 onChange={handleData}
               />

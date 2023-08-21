@@ -18,6 +18,8 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
+import { getAuth, signOut } from "firebase/auth";
+const auth = getAuth();
 
 function Home() {
   const user1 = localStorage.getItem("user");
@@ -25,12 +27,16 @@ function Home() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate('/login', { replace: true })
-  }
+    signOut(auth).then(() => {
+      localStorage.removeItem("user")
+      localStorage.removeItem("uid")
+      navigate("/login", { replace: true });
+    });
+  };
 
   const edit = () => {
-    navigate('/edit', { replace: true })
-  }
+    navigate("/edit", { replace: true });
+  };
   return (
     <div>
       <Box

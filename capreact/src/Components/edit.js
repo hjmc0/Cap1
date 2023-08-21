@@ -27,12 +27,9 @@ import "react-toastify/dist/ReactToastify.css";
 function Edit() {
   const user1 = localStorage.getItem("user");
   const user = JSON.parse(user1);
-  const userId = localStorage.getItem("userid");
-  const userID = userId;
-  const userIDone = `${userId}/userdata`;
-  console.log(userIDone);
+  const userId = localStorage.getItem("uid");
   const navigate = useNavigate();
-  const docRef = doc(db, "userdata", userID);
+  const docRef = doc(db, "userdata", userId);
 
   console.log(docRef);
 

@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Alert, Container, Stack } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
@@ -26,28 +26,26 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const isValidEmail = email.includes("@");
   const navigate = useNavigate();
-  var isAuthorized = false;
 
   const handleLogin = async () => {
-    await signInWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
+    signInWithEmailAndPassword(auth, email, password).then(
+      async (userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        isAuthorized = true;
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("userid", user.id);
-      }
-    );
+        const uid = userCredential.user.uid;
 
-    if (isAuthorized) {
-      navigate("/home", { replace: true });
-    } else {
+        const docRef = doc(db, "userdata", uid);
+        const docSnap = await getDoc(docRef);
+        const userinfo = docSnap.data();
+
+        localStorage.setItem("user", JSON.stringify(userinfo));
+        localStorage.setItem('uid', uid)
+        navigate("/home", { replace: true });
+      }
+    ).catch((error) => {
       toast.error("Your Email or Password is incorrect. Please try again.", {
         position: toast.POSITION.TOP_CENTER,
-      });
-    }
-  };
+      })})};
+  
 
   return (
     <Box
