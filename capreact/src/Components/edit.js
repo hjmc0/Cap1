@@ -17,12 +17,13 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Alert, Container, Stack } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
-import { getDocs, query, where } from "firebase/firestore";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
+import { getAuth, updatePassword } from "firebase/auth";
 
 // const collectionRef = collection(db, "userdata",user.id);
+const auth = getAuth();
 
 function Edit() {
   const user1 = localStorage.getItem("user");
@@ -30,8 +31,6 @@ function Edit() {
   const userId = localStorage.getItem("uid");
   const navigate = useNavigate();
   const docRef = doc(db, "userdata", userId);
-
-  console.log(docRef);
 
   const [inputData, setInputData] = useState(user);
 
@@ -43,7 +42,10 @@ function Edit() {
     e.preventDefault();
 
     // Validate password confirmation
-    if (inputData.password !== inputData.cpassword) {
+    if (
+      inputData.password !== inputData.cpassword ||
+      inputData.password.length < 6
+    ) {
       toast.error("Check your password again!", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -52,17 +54,22 @@ function Edit() {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      console.log(inputData);
       try {
-        await updateDoc(docRef, inputData).then(console.log({ inputData }));
+        await updateDoc(docRef, inputData);
         setInputData({ userdata: user });
-        localStorage.setItem("user", JSON.stringify(inputData));
-        navigate("/login", { replace: true });
+        const authuser = auth.currentUser;
+        updatePassword(authuser, inputData.password)
+          .then(() => {
+            navigate("/home", { replace: true });
+            localStorage.setItem("user", JSON.stringify(inputData));
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } catch (error) {
         console.error("Error adding document: ", error);
       }
     }
-    navigate("/home", { replace: true });
   };
 
   const handleData = (e) => {
