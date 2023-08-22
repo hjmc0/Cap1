@@ -16,6 +16,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
+import { Grid } from '@mui/material';
 
 const pages = ['Dashboard', 'Profile', 'Logout'];
 
@@ -36,15 +37,17 @@ function NavBar() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <Button color="inherit">Dashboard</Button>
-                    <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
-                        <AccountCircle />
-                    </IconButton>
+                    <Grid container spacing={0} justifyContent="space-between">
+                        <Button color="inherit">Dashboard</Button>
+                        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
+                            <AccountCircle />
+                        </IconButton>
+                    </Grid>
                     <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right',}} open={Boolean(anchorEl)} onClose={handleClose}>
                         <MenuItem onClick={handleClose}>
                             Profile
                         </MenuItem>
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={handleClose}> 
                             Logout
                         </MenuItem>
                     </Menu>
