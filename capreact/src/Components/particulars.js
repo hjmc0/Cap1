@@ -11,19 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import MuiPhoneNumber from 'material-ui-phone-number-2';
 
 export default function Particulars (props) {
-    // const user = {
-    //     email: "",
-    //     password: "",
-    //     cpassword: "",
-    //     firstName: "",
-    //     lastName: "",
-    //     address: "",
-    //     contactNum: "",
-    //     nric: "",
-    //     dateOfBirth: "",
-    //   };
-    // const user = user;
-      //console.log(user)
+
       const [inputData, setInputData] = useState(props);
       localStorage.setItem("user", JSON.stringify(inputData))
       
@@ -42,7 +30,6 @@ export default function Particulars (props) {
             }
             
         }
-        console.log(inputData)
         localStorage.setItem("user", JSON.stringify(inputData))
       };
     
@@ -60,6 +47,7 @@ export default function Particulars (props) {
                                 label="Email"
                                 placeholder="Required"
                                 onChange={handleData}
+                                value = {inputData.email}
                                 fullWidth
                                 variant="outlined"
                                 InputLabelProps={{ shrink: true, style: { color: 'black' } }}
@@ -74,6 +62,7 @@ export default function Particulars (props) {
                                 name="password"
                                 label="Password"
                                 placeholder="Required"
+                                value = {inputData.password}
                                 onChange={handleData}
                                 fullWidth
                                 variant="outlined"
@@ -87,6 +76,7 @@ export default function Particulars (props) {
                                 id="cpassword"
                                 name="cpassword"
                                 value = {inputData.cpassword}
+                                onChange={handleData}
                                 label="Re-enter Password"
                                 placeholder="Required"
                                 fullWidth

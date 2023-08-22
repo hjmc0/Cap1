@@ -1,6 +1,7 @@
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase.config";
+import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,14 +13,19 @@ import StepIcon from '@mui/material/StepIcon';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-
 import Review from './Review';
 import Particulars from './particulars';
+
+//Toastify imports---------------------------------------------------
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const steps = ['Particulars', 'Confirmation'];
 
 
 export default function Confirmation() {
+
     const [activeStep, setActiveStep] = React.useState(0);
     const [user, setUser] = React.useState({
         email: "",
@@ -31,12 +37,35 @@ export default function Confirmation() {
         contactNum: "",
         nric: "",
         dateOfBirth: "",
-      })
+        transactionDetails: [{description: "UOB", date:"", amount:10000, newBalance:10000}]
+    })
+    const navigate = useNavigate();
 
-      function getStepContent(step) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const inputData = JSON.parse(localStorage.getItem("user"))
+        const collectionRef = collection(db, "userdata");
+
+        try {
+            await addDoc(collectionRef, inputData);
+            // toast.success("Registration Success!", {
+            //     position: toast.POSITION.TOP_CENTER,
+            // });
+
+        } catch (error) {
+            console.error("Error adding document: ", error);
+        }
+        setTimeout(() => {
+            navigate("/login");
+        }, 5000);
+
+        setActiveStep(activeStep + 1);
+    };
+
+    function getStepContent(step) {
         switch (step) {
             case 0:
-                return <Particulars {...user}/>
+                return <Particulars {...user} />
             case 1:
                 return <Review />;
             default:
@@ -45,7 +74,25 @@ export default function Confirmation() {
     }
 
     const handleNext = () => {
-        setActiveStep(activeStep + 1);
+        const inputData = JSON.parse(localStorage.getItem("user"))
+        const isValidEmail = inputData.email.includes("@");
+        
+        // Validate password confirmation
+        if (inputData.password !== inputData.cpassword) {
+            toast.error("Check your password again!", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        } else if (inputData.email === "" || !isValidEmail) {
+            toast.error("Invalid Email!", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        } else if (inputData.password === "") {
+            toast.error("Invalid Password", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        } else {
+            setActiveStep(activeStep + 1);
+        }
     };
 
     const handleBack = () => {
@@ -88,9 +135,9 @@ export default function Confirmation() {
                                     Thank you for registering.
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                    Your account has been recorded. You may login using your credentials.
+                                    Your account has been recorded. Redirecting to Login Page...
                                 </Typography>
-                                <br/>
+                                <br />
                                 <Button href="/login" variant="contained">
                                     Go to Login
                                 </Button>
@@ -105,20 +152,32 @@ export default function Confirmation() {
                                         </Button>
                                     )}
 
-                                    <Button
+                                    {activeStep === steps.length - 1 && (
+                                        <Button onClick={handleSubmit} sx={{ mt: 3, ml: 1 }}>
+                                            Submit
+                                        </Button>
+                                    )}
+
+                                    {activeStep !== steps.length - 1 && (
+                                        <Button onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+                                            Next
+                                        </Button>
+                                    )}
+
+                                    {/* <Button
                                         variant="contained"
                                         onClick={handleNext}
                                         sx={{ mt: 3, ml: 1 }}
                                     >
                                         {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-                                    </Button>
+                                    </Button> */}
                                 </Box>
                             </React.Fragment>
                         )}
+                    <ToastContainer />
                     </Paper>
 
                 </Container>
-                {/* </Paper> */}
             </React.Fragment>
         </Box >
     );

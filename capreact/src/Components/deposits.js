@@ -14,16 +14,27 @@ export default function Deposits() {
     // const navigate = useNavigate();
     const timeDate= new Date().toDateString()
 
+    const compareDates = (a, b) => {
+        var [day, month, year] = a.date.split("/")
+        var a = new Date(year, month - 1, day)
+  
+        var [day, month, year] = b.date.split("/")
+        var b = new Date(year, month - 1, day)
+  
+        return new Date(a) - new Date(b);
+      };
+      const sortedDate = user.transactionDetails.sort(compareDates).reverse();
+
   return (
     <React.Fragment>
       <Title>Current Balance:</Title>
       <br></br>
       <Typography component="p" variant="h4">
-      {`S$${user.transactionDetails[0].newBalance}`}
+      {`S$${sortedDate[0].newBalance}`}
       </Typography>
       <br></br>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-      {timeDate}
+      Current Date: {timeDate}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
