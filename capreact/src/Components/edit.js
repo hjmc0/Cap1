@@ -39,7 +39,7 @@ function Edit() {
   const [inputData, setInputData] = useState(user);
 
   const handleBack = () => {
-    navigate("/home",{ replace: true });
+    navigate("/user",{ replace: true });
   };
 
   const handleSubmitChanges = async (e) => {
@@ -65,7 +65,7 @@ function Edit() {
         console.error("Error adding document: ", error);
       }
     }
-    navigate("/home" , { replace: true });
+    navigate("/user" , { replace: true });
   };
 
   const handleData = (e) => {

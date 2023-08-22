@@ -17,14 +17,24 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import { Grid } from '@mui/material';
+import { useNavigate } from "react-router";
 
 const pages = ['Dashboard', 'Profile', 'Logout'];
 
 function NavBar() {
     
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const navigate = useNavigate();
 
-    const isMenuOpen = Boolean(anchorEl);
+    const handleLogout = () => {
+        navigate('/login', { replace: true })
+    }
+    
+      const handleUserProfile = () => {
+        navigate('/user', { replace: true })
+    }
+
+    
+    const [anchorEl, setAnchorEl] = React.useState(null);
     
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -44,10 +54,10 @@ function NavBar() {
                         </IconButton>
                     </Grid>
                     <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right',}} open={Boolean(anchorEl)} onClose={handleClose}>
-                        <MenuItem onClick={handleClose}>
-                            Profile
+                        <MenuItem onClick={handleUserProfile}>
+                            User Profile
                         </MenuItem>
-                        <MenuItem onClick={handleClose}> 
+                        <MenuItem onClick={handleLogout}> 
                             Logout
                         </MenuItem>
                     </Menu>
