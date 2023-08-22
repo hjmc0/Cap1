@@ -7,16 +7,24 @@ import Title from './title';
 function createData(time, amount) {
   return { time, amount };
 }
+// const user1 = localStorage.getItem("user");
+//   const user2 = JSON.parse(user1);
+// const handleLogin = async () => {
 
+//   const q = query(collection(db, "userdata"))
+//   const userDoc = await getDocs(q);}
 
-const sortedDate = localStorage.getItem("sortedDate")
-const user = JSON.parse(sortedDate).reverse();
-const data = user.map ((i) => (createData(i.date, i.newBalance)))
-console.log(data);
+  
+
 
 
 export default function Chart() {
   const theme = useTheme();
+
+  const sortedDate = localStorage.getItem("sortedDate")
+const user = JSON.parse(sortedDate).reverse();
+const data = user.map ((i) => (createData(i.date, i.newBalance)))
+console.log(data);
 
   return (
 

@@ -20,6 +20,8 @@ export default function Orders() {
     const user = JSON.parse(user1);
     const navigate = useNavigate();
 
+    
+    
     const compareDates = (a, b) => {
         var [day, month, year] = a.date.split("/")
         var a = new Date(year, month - 1, day)
@@ -30,7 +32,6 @@ export default function Orders() {
       const sortedDate = user.transactionDetails.sort(compareDates).reverse();
 
       localStorage.setItem('sortedDate', JSON.stringify(sortedDate));
-
       
   return (
     <React.Fragment>
