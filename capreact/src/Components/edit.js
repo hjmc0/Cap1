@@ -21,6 +21,7 @@ import { getDocs, query, where } from "firebase/firestore";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
+import NavBar from "./navbar";
 
 // const collectionRef = collection(db, "userdata",user.id);
 
@@ -74,6 +75,7 @@ function Edit() {
 
   return (
     <div>
+      <NavBar />
       <Box
         sx={{
           display: "flex",
@@ -97,11 +99,9 @@ function Edit() {
               Edit User Profile
             </Typography>
             <Grid>
-              <Grid>Email:</Grid>
-              <Grid>{user.email}</Grid>
+              Email: {user.email}
             </Grid>
             <Grid>
-              <Grid>Password:</Grid>
               <Grid>
                 <TextField
                   label="New Password"
@@ -115,7 +115,6 @@ function Edit() {
               </Grid>
             </Grid>
             <Grid>
-              <Grid>Confirm Password:</Grid>
               <Grid>
                 <TextField
                   label="Confirm Password"
@@ -129,7 +128,6 @@ function Edit() {
               </Grid>
             </Grid>
             <Grid>
-              <Grid>First Name:</Grid>
               <Grid>
                 <TextField
                   label="First Name"
@@ -143,7 +141,6 @@ function Edit() {
               </Grid>
             </Grid>
             <Grid>
-              <Grid>Last Name:</Grid>
               <Grid>
                 <TextField
                   label="Last Name"
@@ -157,7 +154,6 @@ function Edit() {
               </Grid>
             </Grid>
             <Grid>
-              <Grid>Address:</Grid>
               <Grid>
                 <TextField
                   label="Address"
@@ -171,7 +167,6 @@ function Edit() {
               </Grid>
             </Grid>
             <Grid>
-              <Grid>Contact Number:</Grid>
               <Grid>
                 <TextField
                   label="Contact Number"
@@ -185,7 +180,6 @@ function Edit() {
               </Grid>
             </Grid>
             <Grid>
-              <Grid>NRIC:</Grid>
               <Grid>
                 <TextField
                   label="NRIC"
@@ -199,7 +193,6 @@ function Edit() {
               </Grid>
             </Grid>
             <Grid>
-              <Grid>Date of Birth:</Grid>
               <Grid>
                 <TextField
                   label="Date of Birth"

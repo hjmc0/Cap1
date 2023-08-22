@@ -18,6 +18,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
+import NavBar from "./navbar";
 
 function Home() {
   const user1 = localStorage.getItem("user");
@@ -33,6 +34,7 @@ function Home() {
   }
   return (
     <div>
+      <NavBar />
       <Box
         sx={{
           display: "flex",

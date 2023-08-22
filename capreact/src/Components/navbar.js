@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,20 +20,27 @@ import FormGroup from '@mui/material/FormGroup';
 import { Grid } from '@mui/material';
 import { useNavigate } from "react-router";
 
-const pages = ['Dashboard', 'Profile', 'Logout'];
-
 function NavBar() {
+
+    const NavBarTexts = [{page:"/home", text: "Dash Board"}, {page:"/user", text: "User Profile"},{page:"/edit", text: "Edit User Profile"}]
+    const location = useLocation();
     
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
         navigate('/login', { replace: true })
     }
     
-      const handleUserProfile = () => {
-        navigate('/user', { replace: true })
+    const handleDashBoard = () => {
+        navigate('/home', { replace: true })
     }
 
+    const handleUserProfile = () => {
+        navigate('/user', { replace: true })
+    }
+    
+    const textToShow = NavBarTexts.find(el => el.page === location.pathname)?.text
     
     const [anchorEl, setAnchorEl] = React.useState(null);
     
@@ -47,13 +55,17 @@ function NavBar() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <Grid container spacing={0} justifyContent="space-between">
-                        <Button color="inherit">Dashboard</Button>
+                    <Grid container spacing={0} justifyContent="space-between" alignItems="center">
+                        
+                        {textToShow}
                         <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
                             <AccountCircle />
                         </IconButton>
                     </Grid>
                     <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right',}} open={Boolean(anchorEl)} onClose={handleClose}>
+                        <MenuItem onClick={handleDashBoard}> 
+                            Dashboard
+                        </MenuItem>
                         <MenuItem onClick={handleUserProfile}>
                             User Profile
                         </MenuItem>
