@@ -18,6 +18,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
+import bg from '../assets/login-bg.gif'
 
 const Login = () => {
 
@@ -61,7 +62,7 @@ const Login = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: '100vh',
-                    backgroundImage: 'url(https://j.gifs.com/66jXYL.gif)',
+                    backgroundImage: `url(${bg})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}
