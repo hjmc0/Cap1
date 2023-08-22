@@ -2,18 +2,25 @@ import * as React from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Title from './title';
+// import { useNavigate } from "react-router";
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
 export default function Deposits() {
+    const user1 = localStorage.getItem("user");
+    const user = JSON.parse(user1);
+    // const navigate = useNavigate();
+
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Title>Current Balance:</Title>
+      <br></br>
       <Typography component="p" variant="h4">
-        $3,024.00
+      {`S$${user.transactionDetails[0].newBalance}`}
       </Typography>
+      <br></br>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         on 15 March, 2019
       </Typography>

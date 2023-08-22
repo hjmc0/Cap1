@@ -35,6 +35,7 @@ function Registration() {
     contactNum: "",
     nric: "",
     dateOfBirth: "",
+    transactionDetails: [{description: "UOB", date:"", amount:10000, newBalance:10000}]
   };
 
   const [inputData, setInputData] = useState(person);
