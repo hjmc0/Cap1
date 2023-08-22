@@ -7,10 +7,51 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './title';
 import { useNavigate } from "react-router";
+import { Grid } from '@mui/material';
 
-// Generate Order Data
-function createData(id, date, description, paymentMethod, amount) {
-  return { id, date, description, paymentMethod, amount };
+
+
+function preventDefault(event) {
+  event.preventDefault();
+}
+
+export default function Orders() {
+    const user1 = localStorage.getItem("user");
+    const user = JSON.parse(user1);
+    const navigate = useNavigate();
+
+  return (
+    <React.Fragment>
+      <Title>Recent Orders</Title>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Description</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Transaction Amount</TableCell>
+            <TableCell align="right">New Balance</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {user.transactionDetails.map((row) => (
+            <TableRow key={row.date}>
+              <TableCell>{row.description}</TableCell>
+              <TableCell>{row.date}</TableCell>
+              <TableCell>{`S$${row.amount}`}</TableCell>
+              <TableCell align="right">{`S$${row.newBalance}`}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+        <Grid container spacing={2} justifyContent="flex-end" alignItems="center">
+        <Grid item><button>Add</button></Grid>
+        <Grid item><button>Delete</button></Grid>
+        </Grid>
+      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+        See more orders
+      </Link>
+    </React.Fragment>
+  );
 }
 
 
@@ -45,42 +86,3 @@ function createData(id, date, description, paymentMethod, amount) {
 //     212.79,
 //   ),
 // ];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-export default function Orders() {
-    const user1 = localStorage.getItem("user");
-    const user = JSON.parse(user1);
-    const navigate = useNavigate();
-
-  return (
-    <React.Fragment>
-      <Title>Recent Orders</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Description</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Transaction Amount</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {user.transactionDetails.map((row) => (
-            <TableRow key={row.date}>
-              <TableCell>{row.description}</TableCell>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.amount}</TableCell>
-              <TableCell align="right">{`S$${row.newBalance}`}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
-    </React.Fragment>
-  );
-}

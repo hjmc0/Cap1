@@ -35,7 +35,7 @@ function Registration() {
     contactNum: "",
     nric: "",
     dateOfBirth: "",
-    transactionDetails: [{description: "UOB", date:"", amount:10000, newBalance:10000}]
+    transactionDetails: [{description: "UOB", date:new Date().toLocaleDateString('en-GB'), amount:10000, newBalance:10000}]
   };
 
   const [inputData, setInputData] = useState(person);
@@ -70,7 +70,7 @@ function Registration() {
       }
       setTimeout(() => {
         navigate("/login");
-      }, 3000);
+      }, 1500);
     }
   };
 

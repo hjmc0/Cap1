@@ -12,6 +12,7 @@ export default function Deposits() {
     const user1 = localStorage.getItem("user");
     const user = JSON.parse(user1);
     // const navigate = useNavigate();
+    const timeDate= new Date().toDateString()
 
   return (
     <React.Fragment>
@@ -22,7 +23,7 @@ export default function Deposits() {
       </Typography>
       <br></br>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+      {timeDate}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
