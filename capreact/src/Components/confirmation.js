@@ -16,27 +16,41 @@ import Typography from '@mui/material/Typography';
 import Review from './Review';
 import Particulars from './particulars';
 
-const steps = ['Particulars', 'Review'];
+const steps = ['Particulars', 'Confirmation'];
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <Particulars />;
-        case 1:
-            return <Review />;
-        default:
-            throw new Error('Unknown step');
-    }
-}
 
 export default function Confirmation() {
     const [activeStep, setActiveStep] = React.useState(0);
+    const [user, setUser] = React.useState({
+        email: "",
+        password: "",
+        cpassword: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        contactNum: "",
+        nric: "",
+        dateOfBirth: "",
+      })
+
+      function getStepContent(step) {
+        switch (step) {
+            case 0:
+                return <Particulars {...user}/>
+            case 1:
+                return <Review />;
+            default:
+                throw new Error('Unknown step');
+        }
+    }
 
     const handleNext = () => {
         setActiveStep(activeStep + 1);
     };
 
     const handleBack = () => {
+        const newUser = JSON.parse(localStorage.getItem("user"))
+        setUser(newUser)
         setActiveStep(activeStep - 1);
     };
 
@@ -52,21 +66,19 @@ export default function Confirmation() {
         }}>
 
             <React.Fragment >
-
                 <Container component="main" maxWidth="md" >
                     <Paper variant="outlined" sx={{
                         pl: 5, pr: 5, justifyContent: 'center',
                         alignItems: 'center',
                         height: '110vh',
+                    }} style={{ backgroundColor: 'lightgrey' }}>
 
-                    }}>
-
-                        <Stepper activeStep={activeStep} sx={{ pt: 5, pb: 6 }} style={{ scale:'160%', marginLeft: '200px', marginRight: '200px' }}>
+                        <Stepper activeStep={activeStep} sx={{ pt: 5, pb: 6 }} style={{ scale: '160%', marginLeft: '200px', marginRight: '200px' }}>
                             {steps.map((label) => (
                                 <Step key={label} >
-                                    <StepLabel style={{fontSize:'20px'}}>
+                                    <StepLabel style={{ fontSize: '20px' }}>
                                         {label}
-                                        </StepLabel>
+                                    </StepLabel>
                                 </Step>
                             ))}
                         </Stepper>
@@ -78,6 +90,10 @@ export default function Confirmation() {
                                 <Typography variant="subtitle1">
                                     Your account has been recorded. You may login using your credentials.
                                 </Typography>
+                                <br/>
+                                <Button href="/login" variant="contained">
+                                    Go to Login
+                                </Button>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>

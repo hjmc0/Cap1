@@ -61,13 +61,13 @@ const Login = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: '100vh',
-                    backgroundImage: 'url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)',
+                    backgroundImage: 'url(https://j.gifs.com/66jXYL.gif)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                 }}
             >
                 <Container maxWidth="xs">
-                    <Paper elevation={3} sx={{ padding: 3 }}>
+                    <Paper elevation={3} sx={{ padding: 3}} >
                         <Stack sx={{ justifyContent: 'center', alignItems: 'center', }}>
                             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                                 <LockOutlinedIcon />

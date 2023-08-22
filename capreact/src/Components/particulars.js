@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,22 +10,46 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import MuiPhoneNumber from 'material-ui-phone-number-2';
 
+export default function Particulars (props) {
+    // const user = {
+    //     email: "",
+    //     password: "",
+    //     cpassword: "",
+    //     firstName: "",
+    //     lastName: "",
+    //     address: "",
+    //     contactNum: "",
+    //     nric: "",
+    //     dateOfBirth: "",
+    //   };
+    // const user = user;
+      //console.log(user)
+      const [inputData, setInputData] = useState(props);
+      localStorage.setItem("user", JSON.stringify(inputData))
+      
 
-export default function Particulars() {
+      const handleData = (e) => {
+        try{
+            setInputData({ ...inputData, [e.target.name]: e.target.value });
+            
+        }
+        catch(error){
+            try{
+                setInputData({...inputData, 'dateOfBirth': e.format('DD/MM/YYYY')})
+            }
+            catch(error){
+                setInputData({...inputData, 'contactNum': e})
+            }
+            
+        }
+        console.log(inputData)
+        localStorage.setItem("user", JSON.stringify(inputData))
+      };
+    
+    
     return (
-
-        // <Box sx={{
-        //     display: 'flex',
-        //     justifyContent: 'center',
-        //     alignItems: 'center',
-        //     height: '100vh',
-        //     backgroundImage: 'url(https://www.pixelstalk.net/wp-content/uploads/images1/Beautiful-singapore-hd-wallpapers.jpg)',
-        //     backgroundSize: 'cover',
-        //     backgroundPosition: 'center',
-        // }}>
-
-        //     <Container maxWidth="md">
-                <React.Fragment>
+            <React.Fragment>
+                <Paper elevation={8} sx={{ padding: 6 }}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <TextField
@@ -34,10 +58,12 @@ export default function Particulars() {
                                 id="email"
                                 name="email"
                                 label="Email"
-                                placeholder="example@gmail.com"
+                                placeholder="Required"
+                                onChange={handleData}
                                 fullWidth
                                 variant="outlined"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
+
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -47,9 +73,11 @@ export default function Particulars() {
                                 id="password"
                                 name="password"
                                 label="Password"
+                                placeholder="Required"
+                                onChange={handleData}
                                 fullWidth
                                 variant="outlined"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -58,23 +86,29 @@ export default function Particulars() {
                                 type="password"
                                 id="cpassword"
                                 name="cpassword"
+                                value = {inputData.cpassword}
                                 label="Re-enter Password"
+                                placeholder="Required"
                                 fullWidth
                                 variant="outlined"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
                             />
-                            <h3>Personal Details (Optional)</h3>
-                            <hr />
+
+                        </Grid>
+                        <Grid item xs={12}>
+                            <h2>Personal Details</h2>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 id="firstName"
                                 name="firstName"
                                 label="First name"
+                                value = {inputData.firstName}
                                 placeholder="Optional"
+                                onChange={handleData}
                                 fullWidth
                                 variant="outlined"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -83,9 +117,11 @@ export default function Particulars() {
                                 name="lastName"
                                 label="Last name"
                                 placeholder="Optional"
+                                value = {inputData.lastName}
+                                onChange={handleData}
                                 fullWidth
                                 variant="outlined"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -94,30 +130,38 @@ export default function Particulars() {
                                 name="nric"
                                 label="NRIC/Passport"
                                 placeholder="Optional"
+                                value = {inputData.nric}
+                                onChange={handleData}
                                 fullWidth
                                 variant="outlined"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
                             />
                         </Grid>
-                        
+
                         <Grid item xs={12} sm={6}>
-                            
+
                             <MuiPhoneNumber
-                                id="phone"
-                                name="phone"
+                                id="contactNum"
+                                name="contactNum"
                                 defaultCountry={'sg'}
                                 variant='outlined'
                                 placeholder="Optional"
+                                value = {inputData.contactNum}
+                                onChange={handleData}
                                 fullWidth
-                                label='Your Phone number'
-                                InputLabelProps={{ shrink: true }}
+                                label='Contact number'
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     label={"Date of Birth"}
-                                    slotProps={{ textField: { fullWidth:true, InputLabelProps: { shrink: true } } }}
+                                    name='dateOfBirth'
+                                    onChange={handleData}
+                                    value = {inputData.dateOfBirth}
+                                    format="DD/MM/YYYY"
+                                    slotProps={{ textField: { fullWidth: true, InputLabelProps: { shrink: true, style: { color: 'black' } } } }}
                                 />
                             </LocalizationProvider>
                         </Grid>
@@ -128,14 +172,15 @@ export default function Particulars() {
                                 label="Address"
                                 fullWidth
                                 placeholder="Optional"
+                                value = {inputData.address}
+                                onChange={handleData}
                                 variant="outlined"
-                                InputLabelProps={{ shrink: true }}
+                                InputLabelProps={{ shrink: true, style: { color: 'black' } }}
                             />
                         </Grid>
 
                     </Grid>
-                 </React.Fragment>
-        //     </Container>
-        // </Box>
+                </Paper>
+            </React.Fragment>
     );
 }
