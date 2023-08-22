@@ -19,7 +19,7 @@ export default function Deposits() {
       <Title>Current Balance:</Title>
       <br></br>
       <Typography component="p" variant="h4">
-      {`S$${user.transactionDetails[0].newBalance}`}
+      {`S$${user.transactionDetails[user.transactionDetails.length-1].newBalance}`}
       </Typography>
       <br></br>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
