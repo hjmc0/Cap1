@@ -64,6 +64,7 @@ function Home() {
               <p>Contact Number: {user.contactNum}</p>
               <p>NRIC: {user.nric}</p>
               <p>Date of Birth: {user.dateOfBirth}</p>
+              <p>Transaction Balance: {user.transactionDetails[0].amount}</p>
             </Typography>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
