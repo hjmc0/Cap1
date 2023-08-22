@@ -20,8 +20,15 @@ export default function Orders() {
     const user = JSON.parse(user1);
     const navigate = useNavigate();
 
-    
-    
+    const compareDates = (a, b) => {
+        var [day, month, year] = a.date.split("/")
+        var a = new Date(year, month - 1, day)
+  
+        var [day, month, year] = b.date.split("/")
+        var b = new Date(year, month - 1, day)
+        return new Date(a) - new Date(b);
+    };
+    const sortedDate = user.transactionDetails.sort(compareDates).reverse();
 
   return (
     <React.Fragment>
@@ -36,7 +43,7 @@ export default function Orders() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {user.transactionDetails.map((row) => (
+          {sortedDate.map((row) => (
             
             <TableRow key={row.amount}>
               <TableCell>{row.description}</TableCell>
