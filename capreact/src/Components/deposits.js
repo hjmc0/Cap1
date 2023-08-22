@@ -34,7 +34,7 @@ export default function Deposits() {
       </Typography>
       <br></br>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-      {timeDate}
+      Current Date: {timeDate}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
