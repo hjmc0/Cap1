@@ -70,7 +70,7 @@ function Registration() {
       }
       setTimeout(() => {
         navigate("/login");
-      }, 1500);
+      }, 1000);
     }
   };
 

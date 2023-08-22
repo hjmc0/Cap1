@@ -20,6 +20,9 @@ export default function Orders() {
     const user = JSON.parse(user1);
     const navigate = useNavigate();
 
+    
+    
+
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
@@ -34,7 +37,8 @@ export default function Orders() {
         </TableHead>
         <TableBody>
           {user.transactionDetails.map((row) => (
-            <TableRow key={row.date}>
+            
+            <TableRow key={row.amount}>
               <TableCell>{row.description}</TableCell>
               <TableCell>{row.date}</TableCell>
               <TableCell>{`S$${row.amount}`}</TableCell>
