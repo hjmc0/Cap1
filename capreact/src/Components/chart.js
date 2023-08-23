@@ -9,14 +9,27 @@ function createData(time, amount) {
 }
 
 
-const sortedDate = localStorage.getItem("sortedDate")
-const user = JSON.parse(sortedDate).reverse();
-const data = user.map ((i) => (createData(i.date, i.newBalance)))
-console.log(data);
-
 
 export default function Chart() {
   const theme = useTheme();
+
+  const user1 = localStorage.getItem("user");
+  const user2 = JSON.parse(user1);
+
+  const compareDates = (a, b) => {
+    var [day, month, year] = a.date.split("/")
+    var a = new Date(year, month - 1, day)
+    var [day, month, year] = b.date.split("/")
+    var b = new Date(year, month - 1, day)
+    return new Date(a) - new Date(b);
+  };
+
+  const sortedDate2 = user2.transactionDetails.sort(compareDates).reverse();
+  localStorage.setItem('sortedDate', JSON.stringify(sortedDate2));
+
+  const sortedDate = localStorage.getItem("sortedDate")
+  const user = JSON.parse(sortedDate).reverse();
+  const data = user.map ((i) => (createData(i.date, i.newBalance)))
 
   return (
 

@@ -16,22 +16,22 @@ function preventDefault(event) {
 }
 
 export default function Orders() {
-    const user1 = localStorage.getItem("user");
-    const user = JSON.parse(user1);
-    const navigate = useNavigate();
+  const user1 = localStorage.getItem("user");
+  const user = JSON.parse(user1);
+  const navigate = useNavigate();
 
-    const compareDates = (a, b) => {
-        var [day, month, year] = a.date.split("/")
-        var a = new Date(year, month - 1, day)
-        var [day, month, year] = b.date.split("/")
-        var b = new Date(year, month - 1, day)
-        return new Date(a) - new Date(b);
-      };
-      const sortedDate = user.transactionDetails.sort(compareDates).reverse();
+  const compareDates = (a, b) => {
+    var [day, month, year] = a.date.split("/")
+    var a = new Date(year, month - 1, day)
+    var [day, month, year] = b.date.split("/")
+    var b = new Date(year, month - 1, day)
+    return new Date(a) - new Date(b);
+  };
 
-      localStorage.setItem('sortedDate', JSON.stringify(sortedDate));
+  const sortedDate = user.transactionDetails.sort(compareDates).reverse();
+  localStorage.setItem('sortedDate', JSON.stringify(sortedDate));
 
-      
+
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
@@ -55,10 +55,10 @@ export default function Orders() {
           ))}
         </TableBody>
       </Table>
-        <Grid container spacing={2} justifyContent="flex-end" alignItems="center">
+      <Grid container spacing={2} justifyContent="flex-end" alignItems="center">
         <Grid item><button>Add</button></Grid>
         <Grid item><button>Delete</button></Grid>
-        </Grid>
+      </Grid>
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
         See more orders
       </Link>
