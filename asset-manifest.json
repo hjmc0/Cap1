@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Cap1/static/css/main.a4838356.css",
-    "main.js": "/Cap1/static/js/main.e0adb724.js",
-    "static/js/787.dada078e.chunk.js": "/Cap1/static/js/787.dada078e.chunk.js",
-    "static/media/login-bg.gif": "/Cap1/static/media/login-bg.c479c4f6a0645b1151fd.gif",
-    "static/media/index.cjs": "/Cap1/static/media/index.f691b2527d98de5d5e38.cjs",
-    "index.html": "/Cap1/index.html",
-    "main.a4838356.css.map": "/Cap1/static/css/main.a4838356.css.map",
-    "main.e0adb724.js.map": "/Cap1/static/js/main.e0adb724.js.map",
-    "787.dada078e.chunk.js.map": "/Cap1/static/js/787.dada078e.chunk.js.map"
+    "main.css": "/Cap1/capreact/static/css/main.a4838356.css",
+    "main.js": "/Cap1/capreact/static/js/main.8d8a4e7c.js",
+    "static/js/787.dada078e.chunk.js": "/Cap1/capreact/static/js/787.dada078e.chunk.js",
+    "static/media/login-bg.gif": "/Cap1/capreact/static/media/login-bg.c479c4f6a0645b1151fd.gif",
+    "static/media/index.cjs": "/Cap1/capreact/static/media/index.f691b2527d98de5d5e38.cjs",
+    "index.html": "/Cap1/capreact/index.html",
+    "main.a4838356.css.map": "/Cap1/capreact/static/css/main.a4838356.css.map",
+    "main.8d8a4e7c.js.map": "/Cap1/capreact/static/js/main.8d8a4e7c.js.map",
+    "787.dada078e.chunk.js.map": "/Cap1/capreact/static/js/787.dada078e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a4838356.css",
-    "static/js/main.e0adb724.js"
+    "static/js/main.8d8a4e7c.js"
   ]
 }
