@@ -17,9 +17,18 @@ function App() {
           <Route path="/home" element={<Dashboard />} />
           <Route path="/user" element={<Home />} />
           <Route path="/edit" element={<Edit />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
       {/*<Confirmation/>*/}
+    </div>
+  );
+}
+
+function PageNotFound() {
+  return (
+    <div>
+      <h2>404 Page not found</h2>
     </div>
   );
 }
