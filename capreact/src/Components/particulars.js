@@ -151,7 +151,7 @@ export default function Particulars (props) {
                                     onChange={handleData}
                                     value = {inputData.dateOfBirth}
                                     format="DD/MM/YYYY"
-                                    slotProps={{ textField: { fullWidth: true, InputLabelProps: { shrink: true, style: { color: 'black' } } } }}
+                                    slotProps={{ textField: { fullWidth: true, error : false, InputLabelProps: { shrink: true, style: { color: 'black' } } } }}
                                 />
                             </LocalizationProvider>
                         </Grid>
