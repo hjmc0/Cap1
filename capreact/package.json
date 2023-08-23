@@ -1,7 +1,7 @@
 {
   "name": "capreact",
   "version": "0.1.0",
-  "homepage": "https://hjmc0.github.io/Cap1/capreact/",
+  "homepage": "https://hjmc0.github.io/Cap1/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
