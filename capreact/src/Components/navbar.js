@@ -29,6 +29,9 @@ function NavBar() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
+        localStorage.removeItem('userid')
+        localStorage.removeItem('user')
+        localStorage.removeItem('sortedDate')
         navigate('/login', { replace: true })
     }
     
