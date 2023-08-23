@@ -11,9 +11,9 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/Cap1">
         <Routes>
-          <Route path="/Cap1" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Confirmation />} />
           <Route path="/home" element={<Dashboard />} />
           <Route path="/user" element={<Home />} />

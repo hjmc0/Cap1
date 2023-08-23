@@ -43,7 +43,7 @@ export default function Confirmation() {
 
       const handleBackToLogin = () => {
         localStorage.removeItem("user");
-        navigate("/Cap1");
+        navigate("/");
      };
 
     const handleSubmit = async (e) => {

@@ -32,7 +32,7 @@ function NavBar() {
         localStorage.removeItem('userid')
         localStorage.removeItem('user')
         localStorage.removeItem('sortedDate')
-        navigate('/Cap1', { replace: true })
+        navigate('/', { replace: true })
     }
     
     const handleDashBoard = () => {
