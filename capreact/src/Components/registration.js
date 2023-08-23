@@ -69,7 +69,7 @@ function Registration() {
         console.error("Error adding document: ", error);
       }
       setTimeout(() => {
-        navigate("/login");
+        navigate("/Cap1");
       }, 1500);
     }
   };
