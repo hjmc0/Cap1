@@ -226,7 +226,7 @@ function Registration() {
           </Button>
 
           <Grid item>
-            <Link href="login" variant="body2">
+            <Link href="Cap1" variant="body2">
               {"Login Page"}
             </Link>
           </Grid>
