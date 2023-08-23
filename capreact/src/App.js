@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Edit from "./Components/edit";
 import Confirmation from "./Components/confirmation";
 import Dashboard from "./Components/transaction";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/edit" element={<Edit />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
       {/*<Confirmation/>*/}
     </div>

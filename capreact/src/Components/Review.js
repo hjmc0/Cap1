@@ -67,7 +67,7 @@ export default function Review() {
                             control={<Checkbox name="agreeTerm" value="yes" />}
                             label={
                                 <Typography style={{ fontSize: '18px' }}>
-                                    <span>I Agree to <a href="../login" target="_blank">Terms and Conditions</a></span>
+                                    <span>I Agree to <a href="https://www.uob.com" target="_blank">Terms and Conditions</a></span>
                                 </Typography>}
                                 />
                     </Grid>

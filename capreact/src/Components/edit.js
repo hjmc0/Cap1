@@ -61,12 +61,14 @@ function Edit() {
         await updateDoc(docRef, inputData).then(console.log({ inputData }));
         setInputData({ userdata: user });
         localStorage.setItem("user", JSON.stringify(inputData));
-        navigate("/Cap1", { replace: true });
+        toast.success("Profile updated", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        navigate("/user", { replace: true });
       } catch (error) {
         console.error("Error adding document: ", error);
       }
     }
-    navigate("/user" , { replace: true });
   };
 
   const handleData = (e) => {
