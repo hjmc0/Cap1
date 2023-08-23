@@ -40,8 +40,10 @@ export default function Confirmation() {
         transactionDetails: [{description: "UOB", date:"", amount:10000, newBalance:10000}]
     })
     const navigate = useNavigate();
+
       const handleBackToLogin = () => {
-    navigate("/Cap1");
+        localStorage.removeItem("user");
+        navigate("/Cap1");
      };
 
     const handleSubmit = async (e) => {
@@ -58,9 +60,13 @@ export default function Confirmation() {
         } catch (error) {
             console.error("Error adding document: ", error);
         }
+        localStorage.removeItem("user");
+        toast.success("Registration Success! Loading Login Page in ...", {
+            position: toast.POSITION.TOP_CENTER,
+          })
         setTimeout(() => {
             navigate("/Cap1");
-        }, 1000);
+        }, 3000);
 
         setActiveStep(activeStep + 1);
     };
