@@ -26,12 +26,15 @@ function Home() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate('/login', { replace: true })
-  }
+    localStorage.removeItem("userid");
+    localStorage.removeItem("user");
+    localStorage.removeItem("sortedDate");
+    navigate("/login", { replace: true });
+  };
 
   const edit = () => {
-    navigate('/edit', { replace: true })
-  }
+    navigate("/edit", { replace: true });
+  };
   return (
     <div>
       <NavBar />
