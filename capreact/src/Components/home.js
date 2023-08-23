@@ -71,28 +71,14 @@ function Home() {
               <p>Date of Birth: {user.dateOfBirth}</p>
               <p>Transaction Balance: {user.transactionDetails[0].amount}</p>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  variant="contained"
-                  fullWidth
-                  color="primary"
-                  onClick={edit}
-                >
-                  Update Profile
-                </Button>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  variant="contained"
-                  fullWidth
-                  color="primary"
-                  onClick={handleLogout}
-                >
-                  Log Out
-                </Button>
-              </Grid>
-            </Grid>
+            <Button
+              variant="contained"
+              fullWidth
+              color="primary"
+              onClick={edit}
+            >
+              Update Profile
+            </Button>
             <ToastContainer />
           </Paper>
         </Container>
