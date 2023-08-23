@@ -69,7 +69,6 @@ function Home() {
               <p>Contact Number: {user.contactNum}</p>
               <p>NRIC: {user.nric}</p>
               <p>Date of Birth: {user.dateOfBirth}</p>
-              <p>Transaction Balance: {user.transactionDetails[0].amount}</p>
             </Typography>
             <Button
               variant="contained"
