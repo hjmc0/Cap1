@@ -11,9 +11,7 @@ root.render(
   </React.StrictMode>
 );
 
-if (window.location.pathname === "/") {
-  window.location.replace("/login")
-}
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
