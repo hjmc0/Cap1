@@ -86,7 +86,7 @@ export default function Particulars (props) {
 
                         </Grid>
                         <Grid item xs={12}>
-                            <h2>Personal Details</h2>
+                            <h2>Personal Details (Optional)</h2>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField

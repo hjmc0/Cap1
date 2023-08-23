@@ -40,6 +40,9 @@ export default function Confirmation() {
         transactionDetails: [{description: "UOB", date:"", amount:10000, newBalance:10000}]
     })
     const navigate = useNavigate();
+      const handleBackToLogin = () => {
+    navigate("/Cap1");
+     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,8 +59,8 @@ export default function Confirmation() {
             console.error("Error adding document: ", error);
         }
         setTimeout(() => {
-            navigate("/login");
-        }, 5000);
+            navigate("/Cap1");
+        }, 1000);
 
         setActiveStep(activeStep + 1);
     };
@@ -138,7 +141,7 @@ export default function Confirmation() {
                                     Your account has been recorded. Redirecting to Login Page...
                                 </Typography>
                                 <br />
-                                <Button href="/login" variant="contained">
+                                <Button href="/Cap1" variant="contained">
                                     Go to Login
                                 </Button>
                             </React.Fragment>
@@ -158,11 +161,19 @@ export default function Confirmation() {
                                         </Button>
                                     )}
 
+                                     {activeStep !== steps.length - 1 && (
+                                        <Button onClick={handleBackToLogin} sx={{ mt: 3, ml: 1 }}>
+                                            Back to Login
+                                        </Button>
+                                    )}
+
                                     {activeStep !== steps.length - 1 && (
                                         <Button onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
                                             Next
                                         </Button>
                                     )}
+                                   
+                                   
 
                                     {/* <Button
                                         variant="contained"
