@@ -8,10 +8,16 @@ import Box from '@mui/material/Box';
 import { Container, FormControlLabel, Checkbox } from '@mui/material'
 import Paper from '@mui/material/Paper';
 
+var isChecked2 = false
 
 export default function Review() {
     const user = JSON.parse(localStorage.getItem("user"));
-
+    const [isChecked, setChecked] = React.useState(false)
+    const handleCheckboxChange=(e)=>{
+        setChecked(e.target.checked)
+        isChecked2=e.target.checked
+  }
+  
     return (
         <React.Fragment>
             <Paper elevation={24} sx={{ padding: 3}}>
@@ -64,7 +70,7 @@ export default function Review() {
                     <Grid item xs={12} >
                         <br /><br />
                         <FormControlLabel
-                            control={<Checkbox name="agreeTerm" value="yes" />}
+                            control={<Checkbox name="agreeTerm" checked= {isChecked} onChange={handleCheckboxChange}/>}
                             label={
                                 <Typography style={{ fontSize: '18px' }}>
                                     <span>I Agree to <a href="https://www.uob.com" target="_blank">Terms and Conditions</a></span>
@@ -77,3 +83,4 @@ export default function Review() {
 
     );
 }
+export {isChecked2};
