@@ -42,7 +42,7 @@ export default function Confirmation() {
 
     const handleBackToLogin = () => {
         localStorage.removeItem("user");
-        navigate("/Cap1");
+        navigate("/");
     };
 
     const handleSubmit = async (e) => {
@@ -65,7 +65,7 @@ export default function Confirmation() {
                 position: toast.POSITION.TOP_CENTER,
             })
             setTimeout(() => {
-                navigate("/Cap1");
+                navigate("/");
             }, 3000);
 
         setActiveStep(activeStep + 1);
@@ -151,7 +151,7 @@ return (
                                 Your account has been recorded. Redirecting to Login Page...
                             </Typography>
                             <br />
-                            <Button href="/Cap1" variant="contained">
+                            <Button href="/" variant="contained">
                                 Go to Login
                             </Button>
                         </React.Fragment>

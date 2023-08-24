@@ -69,7 +69,7 @@ function Registration() {
         console.error("Error adding document: ", error);
       }
       setTimeout(() => {
-        navigate("/Cap1");
+        navigate("/");
       }, 1500);
     }
   };
@@ -226,7 +226,7 @@ function Registration() {
           </Button>
 
           <Grid item>
-            <Link href="Cap1" variant="body2">
+            <Link href= "/" variant="body2">
               {"Login Page"}
             </Link>
           </Grid>
